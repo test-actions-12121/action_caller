@@ -2,4 +2,5 @@
 #  push
 
 jobs:
-  uses: test-actions-12121/action_called/.github/workflows/called_workflow.yml
+  call_a_workflow:
+    uses: test-actions-12121/action_called/.github/workflows/called_workflow.yml
