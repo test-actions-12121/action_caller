@@ -1,5 +1,5 @@
-#on:
-#  push
+on:
+  push
 
 jobs:
   call_a_workflow:
