@@ -1,0 +1,5 @@
+#on:
+#  push
+
+jobs:
+  uses: test-actions-12121/action_called/.github/workflows/called_workflow.yml
