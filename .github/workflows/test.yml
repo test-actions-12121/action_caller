@@ -3,4 +3,4 @@
 
 jobs:
   call_a_workflow:
-    uses: test-actions-12121/action_called/.github/workflows/called_workflow.yml
+    uses: test-actions-12121/action_called/.github/workflows/called_workflow.yml@cbc03823df605a1f3f3fd5eca09ff77ccb92f6a7
