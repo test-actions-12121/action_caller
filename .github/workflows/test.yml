@@ -10,8 +10,8 @@ jobs:
           REPO="test-actions-12121/action_called"
           gh workflow run -r main -R $REPO called_workflow.yml -f imageName=abcd -f imageTag=V20240125
           workflow_id=$(gh run list -R $REPO -s queued -s in_progress -s completed --json databaseId,name,status,conclusion,startedAt| jq '.[].databaseId' | head -1)
-          gh run watch -R $REPO
           echo $workflow_id
+          gh run watch -R $REPO $workflow_id
           gh run view -R $REPO $workflow_id --exit-status
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
