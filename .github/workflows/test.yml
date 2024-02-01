@@ -3,7 +3,7 @@ on:
 
 jobs:
   build_and_push:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Trigger external workflow and watch
         run: |
