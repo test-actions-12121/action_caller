@@ -1,6 +1,9 @@
 #!/bin/bash
 
 REPO="test-actions-12121/action_called"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
 
 get_workflow_status() {
   local id=$1
@@ -21,8 +24,8 @@ done
 echo
 conclusion=$(gh run list -R test-actions-12121/action_called  --json databaseId,name,status,conclusion,startedAt,url | jq -r --arg id "$workflow_id" '.[] | select(.databaseId==($id|tonumber)) | .conclusion')
 if [ "$conclusion" != "success" ]; then
-  echo Workflow failed
+  echo -e "${RED}Workflow failed${NC}"
   exit 1
 else
-  echo Workflow completed successfully
+  echo -e "${GREEN}Workflow completed successfully${NC}"
 fi
