@@ -15,11 +15,14 @@ url=$(gh run list -R $REPO --json databaseId,url | jq -r --arg id "$workflow_id"
 echo Check the live status here: $url
 echo Waiting for workflow to finish
 while [ "$(get_workflow_status $workflow_id)" != "completed" ]; do
-  echo -ne '.'
+  echo '.'
   sleep 1
 done
 echo
 conclusion=$(gh run list -R test-actions-12121/action_called  --json databaseId,name,status,conclusion,startedAt,url | jq -r --arg id "$workflow_id" '.[] | select(.databaseId==($id|tonumber)) | .conclusion')
 if [ "$conclusion" != "success" ]; then
+  echo Workflow failed
   exit 1
+else
+  echo Workflow completed successfully
 fi
