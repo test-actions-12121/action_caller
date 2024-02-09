@@ -11,4 +11,3 @@ jobs:
           ./gh_dispatch.sh
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-

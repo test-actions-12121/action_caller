@@ -11,7 +11,7 @@ get_workflow_status() {
   echo $status
 }
 
-gh workflow run -r main -R $REPO called_workflow.yml -f imageName=abcd -f imageTag=V20240125
+gh workflow run -r main -R $REPO called_workflow.yml -f imageName=abcd -f imageTag=jothimanideriv/ghaction-poc:testing-dev
 sleep 5 # sleep for workflow to be queued.
 workflow_id=$(gh run list -R $REPO --json databaseId | jq '.[].databaseId' | head -1)
 url=$(gh run list -R $REPO --json databaseId,url | jq -r --arg id "$workflow_id" '.[] | select(.databaseId==($id|tonumber)) | .url' )
