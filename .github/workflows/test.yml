@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy step
-        run: echo "Deployment steps go here"
+        run: 
+          | 
+          echo "Deployment steps go here"
+          echo "$GH_TOKEN"
         env:
           GH_TOKEN: ${{ secrets.TEST_SECRET }}
