@@ -9,7 +9,6 @@ jobs:
       - name: Trigger external workflow and watch
         run: echo "stage 1 success"
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment: production
     steps:
