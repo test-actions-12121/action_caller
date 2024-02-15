@@ -7,7 +7,14 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Trigger external workflow and watch
-        run: |
-          ./gh_dispatch.sh
+        run: echo "stage 1 success"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy step
+        run: echo "Deployment steps go here"
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.TEST_SECRET }}
