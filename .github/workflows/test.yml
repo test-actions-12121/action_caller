@@ -31,8 +31,9 @@ jobs:
           push: true
           file: action_caller/Dockerfile
           context: .
-          tags: test
+          tags: jothimanideriv/ghaction-poc:testing-12
   deploy:
+    needs: build_and_test
     runs-on: ubuntu-latest
     environment: production
     steps:
