@@ -7,8 +7,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Minimize the number of layers and clean up in one RUN to keep the image size down
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl=7.68.0-1ubuntu2.6 \
-    ca-certificates=20210119~20.04.1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
