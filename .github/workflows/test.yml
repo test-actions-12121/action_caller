@@ -2,12 +2,15 @@ on:
   push
 
 jobs:
-  build_and_push:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Trigger external workflow and watch
-        run: echo "stage 1 success"
+      - name: Linter for Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ./Dockerfile
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
   deploy:
     runs-on: ubuntu-latest
     environment: production
