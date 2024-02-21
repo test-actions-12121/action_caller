@@ -32,7 +32,7 @@ jobs:
           file: Dockerfile
           context: .
           tags: jothimanideriv/ghaction-poc:testing-12
-  deploy:
+  deploy_to_k3s:
     needs: push_to_docker_hub
     runs-on: self-hosted
     environment: production
@@ -41,4 +41,7 @@ jobs:
       - name: Deploy step
         run: 
           | 
-          ls -al /etc/rancher/k3s/k3s.yaml
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -
+          helm ls -A
+        env:
+          KUBECONFIG: /etc/rancher/k3s/k3s.yaml
