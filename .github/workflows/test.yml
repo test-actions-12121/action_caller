@@ -42,4 +42,5 @@ jobs:
         run: 
           | 
           curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -
+          helm ls -nactions-runner-system
           helm ls -A
