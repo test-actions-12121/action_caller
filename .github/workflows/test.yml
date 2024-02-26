@@ -1,12 +1,16 @@
 name: Dockerfile Standard Checks
 on:
   push:
-    branches: [ main ]  
+    branches: [ main ]
+  workflow_dispatch:
+    
 jobs:
-  build:
-    uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
-    with:
-      images: jothimanideriv/ghaction-poc
-      project_type: skip
-      dockerfile: "./Dockerfile"
-      push: true
+  push_to_registry:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Login to Docker Container Registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
