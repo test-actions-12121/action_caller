@@ -8,5 +8,3 @@ For triggering workflow we just need 3 permissions. Go to Repository Permissions
 
 1. Read access to repo: Under Contents section select `Read-only` 
 2. Actions -> `Read and Write`
-
-test
