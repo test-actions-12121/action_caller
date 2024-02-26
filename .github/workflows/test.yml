@@ -1,26 +1,12 @@
+name: Dockerfile Standard Checks
 on:
-  push
-
+  push:
+    branches: [ main ]  
 jobs:
-  build_and_test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2      
-      - name: Linter for Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: ./Dockerfile
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-  deploy_to_k3s:
-    needs: build_and_test
-    runs-on: self-hosted
-    environment: production
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy step
-        run: 
-          | 
-          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -
-          helm ls -nactions-runner-system
-          helm ls -A
+  build:
+    uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
+    with:
+      images: jothimanideriv/ghaction-poc
+      project_type: skip
+      dockerfile: "./Dockerfile"
+      push: true
