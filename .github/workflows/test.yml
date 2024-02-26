@@ -10,3 +10,4 @@ jobs:
       project_type: skip
       dockerfile: "./Dockerfile"
       push: true
+
