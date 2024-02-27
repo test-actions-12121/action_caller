@@ -12,3 +12,5 @@ jobs:
       project_type: skip
       dockerfile: "./Dockerfile"
       push: true
+      username: ${{ secrets.DOCKERHUB_USERNAME }}
+      password: ${{ secrets.DOCKERHUB_PASSWORD }}
