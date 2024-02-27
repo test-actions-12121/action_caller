@@ -9,11 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production-registry
     steps:
-      - uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
+      - uses: deriv-iac/shared-actions/build_and_test@main
         with:
           images: jothimanideriv/ghaction-poc
           project_type: skip
           dockerfile: "./Dockerfile"
-          push: true
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          push: false
