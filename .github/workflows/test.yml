@@ -6,18 +6,9 @@ on:
     
 jobs:
   build:
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2 
-      - name: Run Dockerfile Standard Checks        
-        uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
-        with:
-          images: jothimanideriv/ghaction-poc
-          project_type: skip
-          dockerfile: "./Dockerfile"
-          push: true
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
+    with:
+      images: jothimanideriv/ghaction-poc
+      project_type: skip
+      dockerfile: "./Dockerfile"
+      push: true
