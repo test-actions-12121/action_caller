@@ -4,13 +4,16 @@ on:
     branches: [ main ]
   workflow_dispatch:
     
-jobs:
+jobs:  
   build:
-    uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
-    with:
-      images: jothimanideriv/ghaction-poc
-      project_type: skip
-      dockerfile: "./Dockerfile"
-      push: true
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
+    runs-on: ubuntu-latest
+    environment: production-registry
+    steps:
+      - uses: deriv-iac/shared-actions/.github/workflows/deriv-ci.yml@master
+        with:
+          images: jothimanideriv/ghaction-poc
+          project_type: skip
+          dockerfile: "./Dockerfile"
+          push: true
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
