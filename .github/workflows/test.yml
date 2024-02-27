@@ -7,6 +7,7 @@ on:
 jobs:  
   build_and_test:
     runs-on: ubuntu-latest
+    environment: production-deploy-k3s
     steps:
       - uses: deriv-iac/shared-actions/deploy_to_k3s@master
         with:
