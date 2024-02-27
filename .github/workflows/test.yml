@@ -12,3 +12,4 @@ jobs:
       - uses: deriv-iac/shared-actions/deploy_to_k3s@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
