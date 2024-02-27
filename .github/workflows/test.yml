@@ -4,8 +4,31 @@ on:
     branches: [ main ]
   workflow_dispatch:
     
-jobs:  
+jobs:
   build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: deriv-iac/shared-actions/build_and_test@master
+        with:
+          images: jothimanideriv/ghaction-poc
+          project_type: skip
+          dockerfile: "./Dockerfile"
+          push: false
+  push_to_prod_registry:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    environment: production-registry    
+    steps:
+      - uses: deriv-iac/shared-actions/push_to_registry@master
+        with:
+          images: jothimanideriv/ghaction-poc
+          project_type: skip
+          dockerfile: "./Dockerfile"
+          push: true
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+  k3s_deployment:
+    needs: push_to_prod_registry
     runs-on: ubuntu-latest
     environment: production-deploy-k3s
     steps:
