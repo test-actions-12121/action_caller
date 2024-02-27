@@ -17,6 +17,7 @@ jobs:
   push_to_prod_registry:
     runs-on: ubuntu-latest
     environment: production-registry
+    needs: build_and_test
     steps:
       - uses: deriv-iac/shared-actions/push_to_registry@master
         with:
