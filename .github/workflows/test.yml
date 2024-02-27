@@ -3,6 +3,10 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
+env:
+  IMAGE_NAME: jothimanideriv/ghaction-poc
+  DOCKERFILE_PATH: "./Dockerfile"
     
 jobs:
   build_and_test:
@@ -10,9 +14,9 @@ jobs:
     steps:
       - uses: deriv-iac/shared-actions/build_and_test@master
         with:
-          images: jothimanideriv/ghaction-poc
+          images: ${{ env.IMAGE_NAME }}
           project_type: skip
-          dockerfile: "./Dockerfile"
+          dockerfile: ${{ env.DOCKERFILE_PATH }}
           push: false
   push_to_prod_registry:
     needs: build_and_test
@@ -21,9 +25,8 @@ jobs:
     steps:
       - uses: deriv-iac/shared-actions/push_to_registry@master
         with:
-          images: jothimanideriv/ghaction-poc
-          project_type: skip
-          dockerfile: "./Dockerfile"
+          images: ${{ env.IMAGE_NAME }}
+          dockerfile: ${{ env.DOCKERFILE_PATH }}
           push: true
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
@@ -35,4 +38,3 @@ jobs:
       - uses: deriv-iac/shared-actions/deploy_to_k3s@master
         with:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
