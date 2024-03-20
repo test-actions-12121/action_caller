@@ -2,7 +2,7 @@
 set -Eeuxo pipefail
 # This will apply our K8s config for every known component
 
-BASE=./
+BASE=.
 cd "$BASE"
 region="us-east-1"
 cluster_prefix="qacluster"
@@ -44,5 +44,8 @@ if grep -qxc cert-manager $FEATURES; then
           --version v1.14.4
     fi
 fi # cert-manager
-# install clusterissuer
-kubectl apply -f $BASE/cert-manager/prod-clusterissuer.yaml
+# install letsencrypt clusterissuer
+CLUSTERISSUER_NAME="letsencrypt-prod"
+if ! kubectl get clusterissuer $CLUSTERISSUER_NAME &> /dev/null; then
+    kubectl apply -f $BASE/config/cert-manager/prod-clusterissuer.yaml
+fi
